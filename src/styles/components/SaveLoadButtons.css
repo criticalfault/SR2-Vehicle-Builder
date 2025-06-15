@@ -1,0 +1,49 @@
+.save-load-buttons {
+  background-color: white;
+  padding: 20px;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.save-button {
+  background-color: #52c41a;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.save-button:hover {
+  background-color: #73d13d;
+}
+
+.load-button-container {
+  position: relative;
+}
+
+.load-button {
+  display: inline-block;
+  background-color: #1890ff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  text-align: center;
+}
+
+.load-button:hover {
+  background-color: #40a9ff;
+}
+
+@media (max-width: 576px) {
+  .save-load-buttons {
+    flex-direction: column;
+  }
+}

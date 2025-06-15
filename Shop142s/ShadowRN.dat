@@ -1,0 +1,67 @@
+# Here's the first version of my net.sourcebook based on stuff grabbed off
+# of ShadowRN...  I've tried to attribute the mods where possible, but
+# some of them were group efforts, so...
+
+# BTW - not all of the restrictions are in place, and they definitely haven't
+# been thoroughly debugged - beware.
+
+
+# Alfredo B Alves (dghost@juno.com)
+3,1,"Rigger tank",1,1,0,"Armour","-1","Cost += 140 + 28 * Level; CFUsed += 12; LoadUsed += 150;"
+3,1,"Rigger tank (reinforced)",1,1,0,"Armour","-1","Cost += 280 + 28 * Level; CFUsed += 15; LoadUsed += 350;"
+
+# Frank Pelletier (jeanpell@vega.ivic.qc.ca)
+# He called it "Increase Body", but I think that implies that more than
+# one level is available...
+3,1,"Reinforced Body",1,1,0,"","Level == 0","LoadUsed += 10 * Body; Body += 1; Cost += 100 * Body; CFUsed += Body"
+
+# Mike Bobroff (airwisp@aol.com)
+# Basically an auto-repair system with nanites having Vehicle B/R equal to
+# their level (unless the Vehicle has taken a D wound, or the main control
+# unit is damaged).  The damage modifier of the vehicle is applied to the
+# VBR roll.
+3,1,"Nano-Mech",1,1,0,"Level","Level < 10","Cost += Level : 25 50 100 150 400 500 600 1400 1600 1800; CFUsed += 1 + Level / 3; LoadUsed += 25;"
+# This was the initial VGW post...  There were many others.
+# At under half speed, handling is at +1, above half speed, aircraft gets
+# +10% speed
+3,1,"Variable Geometry Wings",1,1,0,"","Level == 0","Cost += 500;"
+# When driving in restricted terrain, handling improves by 1.
+# When driving in tight terrain, handling improves by 2.
+# (Both on-road and off-road handling are affected)
+# I've arbitrarily decided that bikes can't have this.
+3,1,"All Wheel Drive",1,1,0,"","Level == 0 && Chassis.ChassisType & 1 && Chassis.ChassisType & 17 != 17","Cost += Body * 100; CFUsed += 1; LoadUsed += 15;"
+# Basically an additional load-enhancer for electric engines - incompatible
+# with Engine Customization
+3,1,"Electrical Engine Amplification",1,1,0,"Level","Level <= 10 && Engine.EngineName == 'Electric*' && Global.ECLevel == 0","Cost += Engine.Cost * Level; CFUsed += Level / 4; Load += Load * 0.05 * Level; LoadUsed += Level"
+
+# Gurth (gurth@xs4all.nl)
+# When activated, multiply Speed and Accel by (Level + 1), Economy is
+# divided by 100 (!)
+3,1,"Afterburners",1,1,0,"Level","Engine.EngineName == 'Diesel*' || Engine.EngineName == 'Gasoline*' && Level <= 3 && Chassis.ChassisType & 200 == 8","Cost += Level * 1000;"
+
+# Sam Thomas (sinbad@dfw.net)
+# I've allowed keeping your current handling if it's better than 4...
+3,1,"Active Suspension",1,1,0,"","Level == 0 && Chassis.ChassisType & 1","Cost += Body * 25;  Handling = 4 << Handling; OffRoad = 4 << OffRoad"
+
+# Ereskanti (ereskanti@aol.com)
+1,17,"Bike",3,3,1,0,0,1,0,-1,0,"1b","o",0,"N","",1
+# He wrote Speed: Q x Gear
+# I'm assuming a Gear Multiplier of 3 min, 10 max
+# His load ratings are obscene, so I'll assume that he meant including
+# a standard 100 kg passenger (and tack on a bit for niceness)
+# He had no accels, I'll use Q to Q*2, no sig, I'm using 3
+# Economy doesn't really apply - I'll say 10 for the sake of argument
+# For Fuel, I'll say Runner's Body (yes, this whole thing doesn't translate
+# too well...  Tough.  :-)
+2,"Bike","Quickness 3",9,30,3,6,10,50,3,10,10,3,0
+
+# Max Rible (slothman@amurgsval.org)
+# He's got a page of his R2 "fixes" at
+# http://www.amurgsval.org/shadowrun/rigging.html
+# which is where I snagged these from...
+# This is very high-powered.  Affecting the Speed, Load, and Accel for such a low price may be unbalancing...
+3,1,"High-Performance Engine",1,1,0,"","Level == 0","Speed *= 1.5; SpeedMax *= 1.5; Accel *= 1.5; AccelMax *= 1.5; Load *= 1.5; Sig -= 1; Economy *= 0.66; Local.ET := 'Nothing' 'Diesel' 'Gasoline' 'Methane' 'Electric'; Local.ECM = Local.ET : 0 1 1 1.5 2; Cost += Engine.Cost * Local.ECM;"
+# I think his sig improvement is a little too high-powered, but...
+3,1,"Passive Aural Masking",1,1,0,"Level","Level <= 4","Sig += Level; Cost += 30 * Level; LoadUsed += Body * 5 * Level;"
+# He spelled it "Armor", but I'm Canadian, eh?
+3,1,"Composite Armour",1,1,0,"Armour","Level <= 8","Armour += Level; Cost += Body * Body * 75 * Level;"

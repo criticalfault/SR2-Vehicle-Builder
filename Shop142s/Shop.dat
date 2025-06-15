@@ -1,0 +1,46 @@
+# The Shop
+# primary data file
+# This file should (for neatness' sake) only contain
+# inclusions from other data files (each datafile should
+# be named according to the book - cause that's how it'll
+# show up in the filter list)
+
+# Each line of data starts off with a number - that's the
+# record type
+# 0 => include another file
+# 1 => define a chassis
+# 2 => define an engine
+# 3 => define a modification
+
+# Update - after 1.2.6, I redid the loading to accept (for the record type):
+# b => unused book
+# B => used book
+# C => chassis
+# E => engine
+# M => modification
+
+# see Rigger2.dat for more detailed information
+# (oh yeah, I add ".dat" to the name given below)
+
+# Books that I know about:
+# Rigger2	- the default R2 stuff
+# ShadowRN	- a bunch of stuff discussed on ShadowRN
+# R2Clean	- bare bones chasses to replace the R2 stuff
+
+# Standard R2 stuff
+B,"Rigger2"
+
+#
+b,"Shop_bak"
+
+#
+b,"Shopce"
+
+#
+b,"ShadowRN"
+
+#
+b,"R2Clean"
+
+#
+B,"Quality"

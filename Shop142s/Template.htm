@@ -1,0 +1,115 @@
+<html>
+<head>
+	<!-- Stupid VB is losing the indentation on Export.
+		You'll have to live with it, I suppose -->
+	<title>The Shop - [#VName#]</title>
+	<meta name=Generator content="The Shop">
+	<link rev=Made href="mailto:james.ojaste@ec.gc.ca">
+
+	<style>
+		body {
+			background: white;
+			color: black;
+			font-family: sans-serif;
+		}
+		
+		/* fonts don't propogate properly in NS4 */
+		td {
+			font-family: sans-serif;
+		}
+		
+		th {
+			font-family: serif;
+			background: lightgrey;
+		}
+	</style>
+</head>
+<body>
+	<h1>#VName#</h1>
+	
+	<p>No description.</p>
+	<table border=0>
+	<tr align=center>
+		<th>Handling</th>
+		<th>Speed</th>
+		<th>Accel</th>
+		<th>Body</th>
+		<th>Armour</th>
+		<th>Sig</th>
+		</tr>
+	<tr align=center>
+		<td>#Handling#/#OffRoad#</td>
+		<td>#Speed#</td>
+		<td>#Accel#</td>
+		<td>#Body#</td>
+		<td>#Armour#</td>
+		<td>#Sig#</td>
+		</tr>
+	<tr align=center>
+		<th>Autonav</th>
+		<th>Pilot</th>
+		<th>Sensor</th>
+		<th>Cargo</th>
+		<th>Load</th>
+		<td></td>
+		</tr>
+	<tr align=center>
+		<td>#Autonav >= 0; Autonav ? '--'#</td>
+		<td>#Pilot >= 0; Pilot ? '--'#</td>
+		<td>#Sensor#</td>
+		<td>#CFLeft#</td>
+		<td>#LoadLeft#</td>
+		<td></td>
+		</tr>
+	<tr><th align=right>Seating</th>
+		<td colspan=2>#Seating#</td>
+		<th colspan=2 align=right>Setup/Breakdown</th>
+		<td>#SetupTime >=0; SetupTime ? 'N/A'#</td>
+		</tr>
+	<tr><th align=right>Entry</th>
+		<td colspan=2>#Entry#</td>
+		<th colspan=2 align=right>Landing/Takeoff</th>
+		<td>#TOL#</td>
+		</tr>
+	<tr><th align=right>Fuel</th>
+		<!-- Figure out the fuel type from the engine type -->
+		<td colspan=2>#Global.FuelType = Engine.EngineName := 'Sail*' 'Electric*' 'Methane*' 'Gasoline*' 'Diesel*' 'Jet Propeller*' 'Turbine*'; ''#
+			#Engine.EngineName#
+				( #Global.FuelType > 1; Fuel ? ''#
+				#Global.FuelType : 'None' 'PF' 'bars' 'liters'# )
+			</td>
+		<th colspan=2 align=right>Economy</th>
+		<!-- Sailboats don't have economy -->
+		<td>#Global.FuelType > 1; Economy ? 'N/A'# #Global.FuelType : '' 'km/PF' 'km/bar' 'km/liter'#</td>
+		</tr>
+	<tr><th align=right>DP Cost</th>
+		<td colspan=2>#Cost#</td>
+		<th colspan=2 align=right>Cost</th>
+		<td>#CostY# &yen;</td>
+		</tr>
+	<tr><th align=right>Template</th>
+		<td colspan=2>#Chassis.ChassisName#</td>
+		<th colspan=2 align=right>Reference</th>
+		<td>The Shop</td>
+		</tr>
+	<tr><th align=right>Features</th>
+		<td colspan=5>
+<!-- The mods structure is a little odd - it *must* be the first thing
+	on the line.  All the code from there until the end (which also must
+	be first) is repeated once for each mod.  You *can* have multiple
+	mods/end sections -->
+#mods
+			#Mods.ModName# (#Mods.Label# #Mods.Level#)<br>
+#end
+		</td>
+		</tr>
+	</table>
+	<hr>
+	<p style="font-size: 66%">
+		The Shop was written and is being maintained by 
+		<a href="mailto:james.ojaste@ec.gc.ca"><author>James Ojaste</author></a>.
+		The latest version can be downloaded from
+		<a href="http://ojaste.dhs.org/~ojastej/SR/">his Shadowrun page</a>.
+	</p>
+</body>
+</html>

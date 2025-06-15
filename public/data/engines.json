@@ -1,0 +1,79 @@
+{
+  "engines": [
+    {
+      "engineName": "Electric",
+      "speed": 3,
+      "speedMax": 4,
+      "accel": 2,
+      "accelMax": 3,
+      "load": 100,
+      "loadMax": 200,
+      "sig": 1,
+      "economy": 10.0,
+      "economyMax": 15.0,
+      "fuel": 1,
+      "cost": 5,
+      "book": "Rigger 2"
+    },
+    {
+      "engineName": "Internal Combustion",
+      "speed": 4,
+      "speedMax": 6,
+      "accel": 3,
+      "accelMax": 4,
+      "load": 200,
+      "loadMax": 400,
+      "sig": 3,
+      "economy": 5.0,
+      "economyMax": 8.0,
+      "fuel": 2,
+      "cost": 8,
+      "book": "Rigger 2"
+    },
+    {
+      "engineName": "Methane",
+      "speed": 4,
+      "speedMax": 5,
+      "accel": 2,
+      "accelMax": 3,
+      "load": 150,
+      "loadMax": 300,
+      "sig": 2,
+      "economy": 7.0,
+      "economyMax": 10.0,
+      "fuel": 3,
+      "cost": 6,
+      "book": "Rigger 2"
+    },
+    {
+      "engineName": "Diesel",
+      "speed": 3,
+      "speedMax": 4,
+      "accel": 2,
+      "accelMax": 3,
+      "load": 300,
+      "loadMax": 600,
+      "sig": 4,
+      "economy": 6.0,
+      "economyMax": 9.0,
+      "fuel": 2,
+      "cost": 7,
+      "book": "Rigger 2"
+    },
+    {
+      "engineName": "Turbine",
+      "speed": 5,
+      "speedMax": 7,
+      "accel": 4,
+      "accelMax": 5,
+      "load": 250,
+      "loadMax": 500,
+      "sig": 5,
+      "economy": 3.0,
+      "economyMax": 5.0,
+      "fuel": 4,
+      "cost": 12,
+      "book": "Rigger 2"
+    }
+  ]
+}

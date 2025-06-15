@@ -1,0 +1,14 @@
+# R2 Quality Factors (page 84)
+
+# There's no appropriate filter, so I'll call this type 9
+3,9,"Master Workmanship",1,1,1,"Level","Level <= 3","Markup += Level * 0.1"
+3,9,"Lemon",1,1,1,"Level","Level <= 3 && Markup >= 0.1","Markup -= Level * 0.15"
+3,9,"Ruggedness",1,1,1,"Level","Level <= 2","Markup += Level * 0.5"
+3,9,"Fragility",1,1,1,"Level","Level <= 2 && Markup >= 0.1","Markup -= Level * 0.5"
+3,9,"Streamlined Layout",1,1,0,"","Level == 0","Markup += 0.25"
+3,9,"Complex Chassis",1,1,0,"","Level == 0 && Markup >= 0.1","Markup -= 0.3"
+3,9,"Custom Built",1,1,0,"","Level == 0 && Markup >= 0.1","Markup -= 0.2"
+3,9,"Prototype/Used",1,1,0,"","Level == 0 && Markup >= 0.1","Markup -= 0.6"
+3,9,"Safety Certified",1,1,0,"","Level == 0","Markup += 0.15"
+3,9,"Passenger Trap",1,1,0,"","Level == 0 && Markup >= 0.1","Markup -= 0.15"
+

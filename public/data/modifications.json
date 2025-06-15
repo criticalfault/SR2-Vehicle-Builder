@@ -1,0 +1,59 @@
+{
+  "modifications": [
+    {
+      "modType": 1,
+      "modName": "Armor",
+      "priority": 1,
+      "markup": 1.0,
+      "level": 1,
+      "label": "Rating",
+      "limit": "Body",
+      "expr": "Cost = Level * 2; CF = Level * 0.5",
+      "book": "Rigger 2"
+    },
+    {
+      "modType": 1,
+      "modName": "Anti-Theft System",
+      "priority": 1,
+      "markup": 1.0,
+      "level": 1,
+      "label": "Rating",
+      "limit": "6",
+      "expr": "Cost = Level * 0.5",
+      "book": "Rigger 2"
+    },
+    {
+      "modType": 1,
+      "modName": "Improved Suspension",
+      "priority": 1,
+      "markup": 1.0,
+      "level": 1,
+      "label": "Rating",
+      "limit": "3",
+      "expr": "Cost = Level * 1; Handling = Handling + Level; OffRoad = OffRoad + Level",
+      "book": "Rigger 2"
+    },
+    {
+      "modType": 2,
+      "modName": "Weapon Mount",
+      "priority": 2,
+      "markup": 1.0,
+      "level": 1,
+      "label": "Mounts",
+      "limit": "Body",
+      "expr": "Cost = Level * 3; CF = Level * 1",
+      "book": "Rigger 2"
+    },
+    {
+      "modType": 2,
+      "modName": "ECM",
+      "priority": 2,
+      "markup": 1.0,
+      "level": 1,
+      "label": "Rating",
+      "limit": "6",
+      "expr": "Cost = Level * 2; Sig = Sig - Level",
+      "book": "Rigger 2"
+    }
+  ]
+}

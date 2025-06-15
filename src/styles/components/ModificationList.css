@@ -1,0 +1,74 @@
+.modification-list {
+  background-color: white;
+  padding: 20px;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.no-mods {
+  color: #999;
+  font-style: italic;
+  text-align: center;
+  padding: 20px 0;
+}
+
+.applied-mods {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.applied-mod {
+  padding: 12px;
+  margin-bottom: 10px;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+}
+
+.mod-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.mod-name {
+  font-weight: 600;
+}
+
+.remove-mod-btn {
+  background-color: #ff4d4f;
+  color: white;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.remove-mod-btn:hover {
+  background-color: #ff7875;
+}
+
+.mod-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.mod-controls label {
+  font-weight: 500;
+}
+
+.mod-controls input {
+  width: 60px;
+  padding: 4px 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.mod-limit {
+  color: #666;
+  font-size: 12px;
+}

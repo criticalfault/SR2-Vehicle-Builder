@@ -1,0 +1,70 @@
+.modification-selector {
+  background-color: white;
+  padding: 20px;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.filter-controls {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.filter-group label {
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+.filter-group select {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.mod-list {
+  max-height: 300px;
+  overflow-y: auto;
+  border: 1px solid #eee;
+  border-radius: 4px;
+}
+
+.mod-item {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.mod-item:last-child {
+  border-bottom: none;
+}
+
+.mod-item:hover {
+  background-color: #f9f9f9;
+}
+
+.mod-name {
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.mod-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-size: 14px;
+  color: #666;
+}
+
+.mod-details span {
+  background-color: #f0f0f0;
+  padding: 2px 6px;
+  border-radius: 3px;
+}
