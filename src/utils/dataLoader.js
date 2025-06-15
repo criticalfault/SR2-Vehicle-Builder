@@ -2,32 +2,17 @@
  * Utility functions for loading data from JSON files
  */
 
-// Helper function to parse the Rigger2.dat format
-const parseRigger2Data = async () => {
+// Load data from the rigger2.json file
+export const loadRigger2Data = async () => {
   try {
-    // In a real implementation, we would fetch the actual Rigger2.dat file
-    // and parse it according to the format described in the file
-    
-    // For this example, we'll use the pre-processed JSON files
-    const chassisResponse = await fetch('/data/chassis.json');
-    const engineResponse = await fetch('/data/engines.json');
-    const modificationResponse = await fetch('/data/modifications.json');
-    
-    if (!chassisResponse.ok || !engineResponse.ok || !modificationResponse.ok) {
-      throw new Error('Failed to load data files');
+    const response = await fetch('/data/rigger2.json');
+    if (!response.ok) {
+      throw new Error('Failed to load Rigger 2 data');
     }
-    
-    const chassisData = await chassisResponse.json();
-    const engineData = await engineResponse.json();
-    const modificationData = await modificationResponse.json();
-    
-    return {
-      chassis: chassisData.chassis,
-      engines: engineData.engines,
-      modifications: modificationData.modifications
-    };
+    const data = await response.json();
+    return data;
   } catch (error) {
-    console.error('Error parsing Rigger2.dat:', error);
+    console.error('Error loading Rigger 2 data:', error);
     return {
       chassis: [],
       engines: [],
@@ -38,7 +23,7 @@ const parseRigger2Data = async () => {
 
 export const loadChassisData = async () => {
   try {
-    const data = await parseRigger2Data();
+    const data = await loadRigger2Data();
     return data.chassis || [];
   } catch (error) {
     console.error('Error loading chassis data:', error);
@@ -48,7 +33,7 @@ export const loadChassisData = async () => {
 
 export const loadEngineData = async () => {
   try {
-    const data = await parseRigger2Data();
+    const data = await loadRigger2Data();
     return data.engines || [];
   } catch (error) {
     console.error('Error loading engine data:', error);
@@ -58,7 +43,7 @@ export const loadEngineData = async () => {
 
 export const loadModificationData = async () => {
   try {
-    const data = await parseRigger2Data();
+    const data = await loadRigger2Data();
     return data.modifications || [];
   } catch (error) {
     console.error('Error loading modification data:', error);
