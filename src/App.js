@@ -83,7 +83,8 @@ function App() {
   };
 
   const handleChassisSelect = (chassis) => {
-    setVehicle(prev => ({ ...prev, chassis }));
+    // When changing chassis, reset the engine since it might not be compatible
+    setVehicle(prev => ({ ...prev, chassis, engine: null }));
   };
 
   const handleEngineSelect = (engine) => {
@@ -164,7 +165,8 @@ function App() {
           <EngineSelector 
             engineData={engineData} 
             selectedEngine={vehicle.engine} 
-            onEngineSelect={handleEngineSelect} 
+            onEngineSelect={handleEngineSelect}
+            selectedChassis={vehicle.chassis}
           />
         </div>
         <div className="right-panel">
