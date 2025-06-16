@@ -23,7 +23,11 @@ export const loadRigger2Data = async () => {
 
 export const loadChassisData = async () => {
   try {
-    const data = await loadRigger2Data();
+    const response = await fetch('/data/chassis.json');
+    if (!response.ok) {
+      throw new Error('Failed to load chassis data');
+    }
+    const data = await response.json();
     return data.chassis || [];
   } catch (error) {
     console.error('Error loading chassis data:', error);
@@ -33,7 +37,11 @@ export const loadChassisData = async () => {
 
 export const loadEngineData = async () => {
   try {
-    const data = await loadRigger2Data();
+    const response = await fetch('/data/engines.json');
+    if (!response.ok) {
+      throw new Error('Failed to load engine data');
+    }
+    const data = await response.json();
     return data.engines || [];
   } catch (error) {
     console.error('Error loading engine data:', error);
@@ -43,7 +51,11 @@ export const loadEngineData = async () => {
 
 export const loadModificationData = async () => {
   try {
-    const data = await loadRigger2Data();
+    const response = await fetch('/data/modifications.json');
+    if (!response.ok) {
+      throw new Error('Failed to load modification data');
+    }
+    const data = await response.json();
     return data.modifications || [];
   } catch (error) {
     console.error('Error loading modification data:', error);

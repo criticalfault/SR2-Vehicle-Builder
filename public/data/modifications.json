@@ -2,58 +2,103 @@
   "modifications": [
     {
       "modType": 1,
-      "modName": "Armor",
+      "modName": "Acceleration Increase",
       "priority": 1,
-      "markup": 1.0,
-      "level": 1,
-      "label": "Rating",
-      "limit": "Body",
-      "expr": "Cost = Level * 2; CF = Level * 0.5",
-      "book": "Rigger 2"
+      "markup": 1,
+      "level": 0,
+      "label": "Level",
+      "limit": "Accel <= AccelMax",
+      "expr": "Accel += Level;Cost += 2 * Level"
     },
     {
       "modType": 1,
-      "modName": "Anti-Theft System",
+      "modName": "Add STOL",
       "priority": 1,
-      "markup": 1.0,
-      "level": 1,
-      "label": "Rating",
-      "limit": "6",
-      "expr": "Cost = Level * 0.5",
-      "book": "Rigger 2"
+      "markup": 1,
+      "level": 0,
+      "label": "",
+      "limit": "Level == 0 && Chassis.ChassisType & 200 == 8",
+      "expr": "TOL = 'S';Cost = Cost + 250"
     },
     {
       "modType": 1,
-      "modName": "Improved Suspension",
+      "modName": "Add VSTOL",
       "priority": 1,
-      "markup": 1.0,
-      "level": 1,
-      "label": "Rating",
-      "limit": "3",
-      "expr": "Cost = Level * 1; Handling = Handling + Level; OffRoad = OffRoad + Level",
-      "book": "Rigger 2"
+      "markup": 1,
+      "level": 0,
+      "label": "",
+      "limit": "Level <= 1 && Chassis.ChassisType & 200 == 8",
+      "expr": "TOL = 'VS';Cost = Cost + 400"
     },
     {
-      "modType": 2,
-      "modName": "Weapon Mount",
-      "priority": 2,
-      "markup": 1.0,
-      "level": 1,
-      "label": "Mounts",
-      "limit": "Body",
-      "expr": "Cost = Level * 3; CF = Level * 1",
-      "book": "Rigger 2"
+      "modType": 1,
+      "modName": "Increase Fuel Tank Capacity",
+      "priority": 1,
+      "markup": 1,
+      "level": 0,
+      "label": "Level",
+      "limit": "-1",
+      "expr": "Local.FuelType = Engine.EngineName := 'Sail*' 'Electric*' 'Methane*' 'Gasoline*' 'Diesel*' 'Jet Propeller*' 'Turbine*';Cost += Level * Local.FuelType : 0 2 2 2 2 1 1;Fuel += Level * Local.FuelType : 0 5 5 1 1 10 10;CFUsed += Level * Local.FuelType : 0 0 0.5 0.02 0.02 0.2 0.2"
     },
     {
-      "modType": 2,
-      "modName": "ECM",
-      "priority": 2,
-      "markup": 1.0,
-      "level": 1,
-      "label": "Rating",
-      "limit": "6",
-      "expr": "Cost = Level * 2; Sig = Sig - Level",
-      "book": "Rigger 2"
+      "modType": 1,
+      "modName": "Handling Improvement",
+      "priority": 1,
+      "markup": 1,
+      "level": 0,
+      "label": "Level",
+      "limit": "Level <= Chassis.Handling / 2",
+      "expr": "Handling -= Level;Cost += 25 * Level"
+    },
+    {
+      "modType": 1,
+      "modName": "Handling Improvement (OffRoad)",
+      "priority": 1,
+      "markup": 1,
+      "level": 0,
+      "label": "Level",
+      "limit": "Level <= Chassis.OffRoad / 2",
+      "expr": "OffRoad -= Level;Cost += 25 * Level"
+    },
+    {
+      "modType": 1,
+      "modName": "Hydrofoil",
+      "priority": 1,
+      "markup": 1,
+      "level": 0,
+      "label": "",
+      "limit": "Level == 0 && Chassis.ChassisType & 2",
+      "expr": "Cost += 50;CFUsed += 8"
+    },
+    {
+      "modType": 1,
+      "modName": "Improved Economy",
+      "priority": 1,
+      "markup": 1,
+      "level": 0,
+      "label": "Level",
+      "limit": "Economy <= EconomyMax",
+      "expr": "Economy += Economy * Level * 0.05;Cost = Cost + 5 * Level"
+    },
+    {
+      "modType": 1,
+      "modName": "Increased Cargo Space",
+      "priority": 1,
+      "markup": 1,
+      "level": 0,
+      "label": "CF",
+      "limit": "CF <= CFMax",
+      "expr": "CF += Level;Cost += 5 * Level"
+    },
+    {
+      "modType": 1,
+      "modName": "Living Amenities (Basic)",
+      "priority": 1,
+      "markup": 1,
+      "level": 0,
+      "label": "People",
+      "limit": "-1",
+      "expr": "Cost += 40 * Level;CFUsed += 200;LoadUsed += 100"
     }
   ]
 }
