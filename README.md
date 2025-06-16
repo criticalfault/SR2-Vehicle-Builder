@@ -8,7 +8,40 @@ A React-based static site for creating and customizing vehicles for Shadowrun 2.
 - Add modifications to your vehicle
 - Calculate vehicle statistics based on your selections
 - Save and load vehicle designs
-- Export vehicle details
+
+## Test Suite
+
+The application includes a comprehensive test suite to ensure functionality and reliability:
+
+### Running Tests
+
+```bash
+# Run all tests
+npm test
+
+# Run tests with coverage report
+npm test -- --coverage
+```
+
+### Test Structure
+
+- **Unit Tests**: Test individual components and utilities in isolation
+- **Integration Tests**: Test interactions between components
+
+#### Test Files
+
+- **Utility Tests**:
+  - `dataLoader.test.js`: Tests data loading from JSON files
+  - `vehicleCalculator.test.js`: Tests vehicle statistics calculation logic
+
+- **Component Tests**:
+  - `ChassisSelector.test.js`: Tests chassis selection functionality
+  - `EngineSelector.test.js`: Tests engine selection functionality
+  - `ModificationList.test.js`: Tests modification management
+  - `VehicleStats.test.js`: Tests statistics display
+
+- **App Tests**:
+  - `App.test.js`: Tests the main application component
 
 ## Deployment to AWS S3
 
@@ -95,7 +128,7 @@ http://shadowrun-vehicle-creator.s3-website-us-east-1.amazonaws.com
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/shadowrun-vehicle-creator.git
+git clone https://github.com/criticalfault/SR2-Vehicle-Builder.git
 cd shadowrun-vehicle-creator
 
 # Install dependencies
@@ -104,6 +137,19 @@ npm install
 # Start development server
 npm start
 ```
+
+### Development Workflow
+
+1. Make changes to the code
+2. Run tests to ensure functionality: `npm test`
+3. Start the development server: `npm start`
+4. View the application at `http://localhost:3000`
+
+## Data Structure
+
+The application uses JSON files to store vehicle data:
+
+- `public/data/rigger2.json`: Contains chassis, engine, and modification data from the Rigger 2 sourcebook
 
 ## License
 
