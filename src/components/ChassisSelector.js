@@ -3,17 +3,13 @@ import '../styles/components/ChassisSelector.css';
 
 const ChassisSelector = ({ chassisData, selectedChassis, onChassisSelect }) => {
   const [filter, setFilter] = useState('All');
-  const [bookFilter, setBookFilter] = useState('All');
   
-  // Get unique chassis types and books for filtering
+  // Get unique chassis types for filtering
   const chassisTypes = ['All', ...new Set(chassisData.map(chassis => chassis.chassisType))];
-  const books = ['All', ...new Set(chassisData.map(chassis => chassis.book))];
   
-  // Filter chassis based on selected filters
+  // Filter chassis based on selected type filter
   const filteredChassis = chassisData.filter(chassis => {
-    const typeMatch = filter === 'All' || chassis.chassisType === parseInt(filter);
-    const bookMatch = bookFilter === 'All' || chassis.book === bookFilter;
-    return typeMatch && bookMatch;
+    return filter === 'All' || chassis.chassisType === parseInt(filter);
   });
 
   return (
@@ -30,19 +26,6 @@ const ChassisSelector = ({ chassisData, selectedChassis, onChassisSelect }) => {
           >
             {chassisTypes.map((type, index) => (
               <option key={index} value={type}>{type}</option>
-            ))}
-          </select>
-        </div>
-        
-        <div className="filter-group">
-          <label htmlFor="chassis-book-filter">Book:</label>
-          <select 
-            id="chassis-book-filter" 
-            value={bookFilter}
-            onChange={(e) => setBookFilter(e.target.value)}
-          >
-            {books.map((book, index) => (
-              <option key={index} value={book}>{book}</option>
             ))}
           </select>
         </div>

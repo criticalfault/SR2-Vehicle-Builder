@@ -86,24 +86,7 @@ describe('ChassisSelector component', () => {
     expect(screen.queryByText('Scooter')).not.toBeInTheDocument();
   });
 
-  it('filters chassis by book', () => {
-    render(
-      <ChassisSelector 
-        chassisData={mockChassisData} 
-        selectedChassis={null} 
-        onChassisSelect={mockOnChassisSelect} 
-      />
-    );
-
-    // Filter by book "Shadowrun"
-    const bookFilter = screen.getByRole('combobox', { name: /book/i });
-    fireEvent.change(bookFilter, { target: { value: 'Shadowrun' } });
-
-    // Now only Shadowrun chassis should be visible
-    expect(screen.queryByText('Sedan')).not.toBeInTheDocument();
-    expect(screen.queryByText('Sports Car')).not.toBeInTheDocument();
-    expect(screen.getByText('Scooter')).toBeInTheDocument();
-  });
+  // Book filter test removed as the feature has been removed
 
   it('calls onChassisSelect when a chassis is clicked', () => {
     render(
