@@ -9,6 +9,12 @@ const ChassisSelector = ({ chassisData, selectedChassis, onChassisSelect }) => {
   
   // Filter chassis based on selected type filter
   const filteredChassis = chassisData.filter(chassis => {
+    if(filter === 'Drones'){
+      return chassis.pilot !== -1
+    }
+    if(filter === 'Vehicles'){
+      return chassis.pilot === -1
+    }
     return filter === 'All' || chassis.chassisType === parseInt(filter);
   });
 
@@ -24,9 +30,14 @@ const ChassisSelector = ({ chassisData, selectedChassis, onChassisSelect }) => {
             value={filter}
             onChange={(e) => setFilter(e.target.value)}
           >
-            {chassisTypes.map((type, index) => (
-              <option key={index} value={type}>{type}</option>
-            ))}
+             <option key={0} value="All">All</option>
+             <option key={1} value="Drones">All Drones</option>
+             <option key={2} value="Vehicles">All Vehicles</option>
+             <option key={3} value={17}>Bikes</option>
+             <option key={4} value={1}>Ground vehicles</option>
+             <option key={5} value={2}>Water craft</option>
+             <option key={6} value={4}>Hovercraft</option>
+             <option key={7} value={8}>Aircraft</option>
           </select>
         </div>
       </div>
