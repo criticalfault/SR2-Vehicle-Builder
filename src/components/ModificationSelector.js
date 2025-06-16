@@ -3,17 +3,13 @@ import '../styles/components/ModificationSelector.css';
 
 const ModificationSelector = ({ modificationData, onAddModification }) => {
   const [typeFilter, setTypeFilter] = useState('All');
-  const [bookFilter, setBookFilter] = useState('All');
   
-  // Get unique modification types and books for filtering
+  // Get unique modification types for filtering
   const modTypes = ['All', ...new Set(modificationData.map(mod => mod.modType))];
-  const books = ['All', ...new Set(modificationData.map(mod => mod.book))];
   
-  // Filter modifications based on selected filters
+  // Filter modifications based on selected type filter
   const filteredMods = modificationData.filter(mod => {
-    const typeMatch = typeFilter === 'All' || mod.modType === parseInt(typeFilter);
-    const bookMatch = bookFilter === 'All' || mod.book === bookFilter;
-    return typeMatch && bookMatch;
+    return typeFilter === 'All' || mod.modType === parseInt(typeFilter);
   });
 
   const handleAddMod = (mod) => {
@@ -39,19 +35,6 @@ const ModificationSelector = ({ modificationData, onAddModification }) => {
             ))}
           </select>
         </div>
-        
-        <div className="filter-group">
-          <label htmlFor="mod-book-filter">Book:</label>
-          <select 
-            id="mod-book-filter" 
-            value={bookFilter}
-            onChange={(e) => setBookFilter(e.target.value)}
-          >
-            {books.map((book, index) => (
-              <option key={index} value={book}>{book}</option>
-            ))}
-          </select>
-        </div>
       </div>
       
       <div className="mod-list">
@@ -66,7 +49,6 @@ const ModificationSelector = ({ modificationData, onAddModification }) => {
               <span>Type: {mod.modType}</span>
               <span>Priority: {mod.priority}</span>
               <span>Limit: {mod.limit}</span>
-              <span>Book: {mod.book}</span>
             </div>
           </div>
         ))}
