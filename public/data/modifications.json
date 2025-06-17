@@ -1,6 +1,328 @@
 {
   "modifications": [
     {
+      "modType": 2,
+      "modName": "Engine Customization",
+      "priority": 1,
+      "markup": 1,
+      "level": 1,
+      "label": "Level",
+      "limit": "-1",
+      "expr": "Global.EC = Level; Global.ECLevel = Level; Local.base = 0.75 + 0.5 * Level;Global.ECCost = Engine.Cost * Local.base; Cost += Global.ECCost"
+    },
+    {
+      "modType": 2,
+      "modName": "Engine Customization: Speed",
+      "priority": 2,
+      "markup": 1,
+      "level": 1,
+      "label": "Level",
+      "limit": "Global.EC >= 0",
+      "expr": "Global.EC -= Level;Speed += 30 * Level; Local.Max = Speed >> SpeedMax; SpeedMax = Local.Max << SpeedMax * 1.75"
+    },
+    {
+      "modType": 2,
+      "modName": "Engine Customization: Acceleration",
+      "priority": 2,
+      "markup": 1,
+      "level": 1,
+      "label": "Level",
+      "limit": "Global.EC >= 0",
+      "expr": "Global.EC -= Level;Accel += 2 * Level; Local.Max = Accel >> AccelMax; AccelMax = Local.Max << AccelMax * 1.75"
+    },
+    {
+      "modType": 2,
+      "modName": "Engine Customization: Load",
+      "priority": 2,
+      "markup": 1,
+      "level": 1,
+      "label": "Level",
+      "limit": "Global.EC >= 0",
+      "expr": "Global.EC -= Level;Load += 50 * Body * Level; Local.Max = Load >> LoadMax; LoadMax = Local.Max << LoadMax * 1.75"
+    },
+    {
+      "modType": 2,
+      "modName": "Gridlink Power",
+      "priority": 1,
+      "markup": 1,
+      "level": 0,
+      "label": "",
+      "limit": "Engine.EngineName == 'Electric*' && Chassis.ChassisType & 1 == 1 && Pilot == -1 && Level == 0",
+      "expr": ""
+    },
+    {
+      "modType": 2,
+      "modName": "Nitrous Oxide Injectors",
+      "priority": 1,
+      "markup": 1,
+      "level": 0,
+      "label": "Level",
+      "limit": "Engine.EngineName == 'Gasoline*' || Engine.EngineName == 'Diesel*' && Level <= 6",
+      "expr": "Cost += 55 * Level;CFUsed += 1.5;LoadUsed += 15"
+    },
+    {
+      "modType": 2,
+      "modName": "SunCell Power",
+      "priority": 1,
+      "markup": 1,
+      "level": 0,
+      "label": "",
+      "limit": "Engine.EngineName == 'Electric*' && Chassis.ChassisType & 17 != 17 && Level == 0",
+      "expr": "Cost += 5"
+    },
+    {
+      "modType": 2,
+      "modName": "Turbocharging",
+      "priority": 100,
+      "markup": 1,
+      "level": 0,
+      "label": "Level",
+      "limit": "Engine.EngineName == 'Gasoline*' || Engine.EngineName == 'Diesel*' || Engine.EngineName == 'Methane*' && Chassis.ChassisType & 8 == 0 || Engine.EngineName == 'Electric*'",
+      "expr": "Cost += Engine.Cost * 1.75 ^ Level;Speed += 15 * Level; Accel += Level;Sig -= 1 * Level;Economy *= 0.95 ^ Level;Engine.SpeedMax * 0.25 < 15; SpeedMax += 15 ? Engine.SpeedMax * 0.25"
+    },
+    {
+      "modType": 3,
+      "modName": "Adjusted Controls (Dwarf)",
+      "priority": 1,
+      "markup": 1,
+      "level": 0,
+      "label": "",
+      "limit": "Level == 0",
+      "expr": "Cost += 25"
+    },
+    {
+      "modType": 3,
+      "modName": "Adjusted Controls (Troll)",
+      "priority": 1,
+      "markup": 1,
+      "level": 0,
+      "label": "",
+      "limit": "Level == 0",
+      "expr": "Cost += 35"
+    },
+    {
+      "modType": 3,
+      "modName": "Adjusted Controls (Other)",
+      "priority": 1,
+      "markup": 1,
+      "level": 0,
+      "label": "",
+      "limit": "Level == 0",
+      "expr": "Cost += 30"
+    },
+    {
+      "modType": 3,
+      "modName": "Autonav",
+      "priority": 1,
+      "markup": 1,
+      "level": 0,
+      "label": "Level",
+      "limit": "Chassis.ChassisType != 17 || Level <= 2 || Global.Rigged && Level <= 4",
+      "expr": "Cost -= Autonav : 5 10 50 150; Autonav = Level; Cost += Level : 5 10 50 150"
+    },
+    {
+      "modType": 3,
+      "modName": "Contingency Maneuver Controls",
+      "priority": 1,
+      "markup": 1,
+      "level": 0,
+      "label": "Rating",
+      "limit": "Level < 10",
+      "expr": "Cost += Level : 35 70 105 300 375 450 1050 1200 1350; LoadUsed += 25"
+    },
+    {
+      "modType": 3,
+      "modName": "Datajack port",
+      "priority": 1,
+      "markup": 1,
+      "level": 0,
+      "label": "",
+      "limit": "Level == 0",
+      "expr": "Cost += 25;LoadUsed += 10"
+    },
+    {
+      "modType": 3,
+      "modName": "Drive-by-Wire",
+      "priority": 1,
+      "markup": 1,
+      "level": 0,
+      "label": "Level",
+      "limit": "Level <= 3",
+      "expr": "Level > 0;Global.DBW = 10 ? 0; Global.DBWLevel = Level; Handling -= Level; Cost += Chassis.Cost * 1.75 ^ Level - Chassis.Cost"
+    },
+    {
+      "modType": 3,
+      "modName": "Drive-by-Wire: Accel",
+      "priority": 3,
+      "markup": 1,
+      "level": 0,
+      "label": "Level",
+      "limit": "Global.DBW >= 0",
+      "expr": "Global.DBWLevel -= Level;Accel += Level / 100 * Accel"
+    },
+    {
+      "modType": 3,
+      "modName": "Drive-by-Wire: Speed",
+      "priority": 3,
+      "markup": 1,
+      "level": 0,
+      "label": "Level",
+      "limit": "Global.DBW >= 0",
+      "expr": "Global.DBWLevel -= Level;Speed += Level / 100 * Speed"
+    },
+    {
+      "modType": 3,
+      "modName": "Drive-by-Wire: Load",
+      "priority": 3,
+      "markup": 1,
+      "level": 0,
+      "label": "Level",
+      "limit": "Global.DBW >= 0",
+      "expr": "Global.DBWLevel -= Level;Load += Level / 100 * Load"
+    },
+    {
+      "modType": 3,
+      "modName": "Improved Control Surfaces",
+      "priority": 2,
+      "markup": 1,
+      "level": 0,
+      "label": "Level",
+      "limit": "Chassis.ChassisType & 2 && Global.DBW == 0 && Level <= 2",
+      "expr": "Handling -= Level; Cost += Chassis.Cost * 1.40 ^ Level - Chassis.Cost"
+    },
+    {
+      "modType": 3,
+      "modName": "Improved Suspension",
+      "priority": 2,
+      "markup": 1,
+      "level": 0,
+      "label": "Level",
+      "limit": "Chassis.ChassisName != '*Tracked' && Chassis.ChassisType & 1 && Global.DBW == 0 && Level <= 2",
+      "expr": "Handling -= Level; Chassis.ChassisType & 17 == 17; OffRoad -= Level ? 0; Cost += Chassis.Cost * 1.25 ^ Level - Chassis.Cost"
+    },
+    {
+      "modType": 3,
+      "modName": "Off-Road Suspension",
+      "priority": 1,
+      "markup": 1,
+      "level": 0,
+      "label": "Level",
+      "limit": "Chassis.ChassisName != '*Tracked' && Chassis.ChassisType & 1 && Level <= 2",
+      "expr": "Handling += Level; OffRoad -= Level; Speed -= 15; Local.foo = Chassis.ChassisType / 8; Economy *= Local.foo : 1.15 1.3 1.3 1.4; Cost += Chassis.Cost * 1.50 ^ Level - Chassis.Cost"
+    },
+    {
+      "modType": 3,
+      "modName": "Remote-Control Interfaces",
+      "priority": 1,
+      "markup": 1,
+      "level": 0,
+      "label": "",
+      "limit": "Level == 0",
+      "expr": "Pilot = 1; Cost += 25 * Body"
+    },
+    {
+      "modType": 3,
+      "modName": "Remote Pilot Advanced Programming",
+      "priority": 2,
+      "markup": 1,
+      "level": 0,
+      "label": "Rating",
+      "limit": "Pilot >= 0 && Level <= 5",
+      "expr": "Cost -= Pilot : 0 50 250 1250 5000; Pilot = Level; Cost += Level : 0 50 250 1250 5000; Security = Security >> Level : 0 0 0 1 0; Military = Military >> Level : 0 0 0 0 1"
+    },
+    {
+      "modType": 3,
+      "modName": "Rigger Adaptation",
+      "priority": 1,
+      "markup": 1,
+      "level": 0,
+      "label": "",
+      "limit": "Level == 0",
+      "expr": "Cost += 35; Global.Rigged = 1"
+    },
+    {
+      "modType": 3,
+      "modName": "Secondary Controls",
+      "priority": 1,
+      "markup": 1,
+      "level": 0,
+      "label": "",
+      "limit": "Chassis.ChassisType != 17 && Level == 0",
+      "expr": "CFUsed += 1; Cost += 5"
+    },
+    {
+      "modType": 4,
+      "modName": "Standard Armour",
+      "priority": 1,
+      "markup": 1,
+      "level": 0,
+      "label": "Armour",
+      "limit": "-1",
+      "expr": "Armour += Level; LoadUsed += Body * Body * 5 * Level; Handling += Level / 6; Cost += 50 * Level"
+    },
+    {
+      "modType": 4,
+      "modName": "Concealed Armour",
+      "priority": 1,
+      "markup": 1,
+      "level": 0,
+      "label": "Armour",
+      "limit": "-1",
+      "expr": "Armour += Level; LoadUsed += Body * Body * 5 * Level; CFUsed += 2 * Level; Cost += 50 * Level"
+    },
+    {
+      "modType": 4,
+      "modName": "Ablative Armour",
+      "priority": 1,
+      "markup": 1,
+      "level": 1,
+      "label": "Armour",
+      "limit": "Level <= 3",
+      "expr": "LoadUsed += Body * 100; Armour += 2 * Level; Local.lev = Level + 2; Local.cost = Local.lev * Local.lev * 100; Level > 1; Cost += Local.cost ? 700"
+    },
+    {
+      "modType": 4,
+      "modName": "Advanced Passenger Protection Systems",
+      "priority": 1,
+      "markup": 1,
+      "level": 0,
+      "label": "Seats",
+      "limit": "Chassis.ChassisType & 17 != 17",
+      "expr": "Cost += 30 * Level"
+    },
+    {
+      "modType": 4,
+      "modName": "Crash Cages",
+      "priority": 1,
+      "markup": 1,
+      "level": 0,
+      "label": "",
+      "limit": "Chassis.ChassisType & 17 != 17 && Level == 0",
+      "expr": "LoadUsed += 10; Cost += 40"
+    },
+    {
+      "modType": 4,
+      "modName": "EnviroSeal (gas)",
+      "priority": 1,
+      "markup": 1,
+      "level": 0,
+      "label": "",
+      "limit": "Level == 0 && Chassis.ChassisType != 17",
+      "expr": "Global.ES = -1; Cost += Body * 3"
+    },
+    {
+      "modType": 4,
+      "modName": "EnviroSeal (water)",
+      "priority": 1,
+      "markup": 1,
+      "level": 0,
+      "label": "",
+      "limit": "Level == 0 && Chassis.ChassisType != 17",
+      "expr": "Global.ES = -1; Cost += Body * 10"
+    }
+  ],
+  "designs": [
+    {
       "modType": 1,
       "modName": "Acceleration Increase",
       "priority": 1,
@@ -99,6 +421,86 @@
       "label": "People",
       "limit": "-1",
       "expr": "Cost += 40 * Level;CFUsed += 200;LoadUsed += 100"
+    },
+    {
+      "modType": 1,
+      "modName": "Living Amenities (Improved)",
+      "priority": 1,
+      "markup": 1,
+      "level": 0,
+      "label": "People",
+      "limit": "-1",
+      "expr": "Cost += 50 + 40 * Level;CFUsed += 200;LoadUsed += 100"
+    },
+    {
+      "modType": 1,
+      "modName": "Living Amenities (High)",
+      "priority": 1,
+      "markup": 1,
+      "level": 0,
+      "label": "People",
+      "limit": "-1",
+      "expr": "Cost += 100 + 40 * Level;CFUsed += 200;LoadUsed += 100"
+    },
+    {
+      "modType": 1,
+      "modName": "Load Increase",
+      "priority": 1,
+      "markup": 1,
+      "level": 0,
+      "label": "Level",
+      "limit": "Load <= LoadMax",
+      "expr": "Cost += Level;Load += 10 * Level"
+    },
+    {
+      "modType": 1,
+      "modName": "Medical-Treatment Gear",
+      "priority": 1,
+      "markup": 1,
+      "level": 0,
+      "label": "Patients",
+      "limit": "-1",
+      "expr": "Cost += 400 + 80 * Level;CFUsed += 225;LoadUsed += 500;Markup += 1"
+    },
+    {
+      "modType": 1,
+      "modName": "Signature Improvement",
+      "priority": 1,
+      "markup": 1,
+      "level": 0,
+      "label": "Level",
+      "limit": "Level <= 3",
+      "expr": "Cost += Level ^ 4 * 200; Sig += Level; Security = Security >> Level : 0 1 0; Military = Military >> Level : 0 0 1"
+    },
+    {
+      "modType": 1,
+      "modName": "Smart Materials",
+      "priority": 1,
+      "markup": 1,
+      "level": 0,
+      "label": "",
+      "limit": "Level == 0",
+      "expr": "Cost += 100;Markup += 0.5;Handling -= 1; OffRoad -= 1;SpeedMax *= 1.15;AccelMax *= 1.15;LoadMax *= 1.15; Chassis.ChassisType & 64; Sig += 1 ? 0"
+    },
+    {
+      "modType": 1,
+      "modName": "Speed Increase",
+      "priority": 1,
+      "markup": 1,
+      "level": 0,
+      "label": "Level",
+      "limit": "Speed <= SpeedMax",
+      "expr": "Cost += 2 * Level;Speed += Level"
+    },
+    {
+      "modType": 1,
+      "modName": "Structural Agility",
+      "priority": 2,
+      "markup": 1,
+      "level": 0,
+      "label": "Level",
+      "limit": "Level <= Global.DBW",
+      "expr": "Cost += 150 * Level"
     }
   ]
 }
