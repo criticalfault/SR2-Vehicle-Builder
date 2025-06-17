@@ -5,11 +5,11 @@ const ModificationSelector = ({ modificationData, onAddModification }) => {
   const [typeFilter, setTypeFilter] = useState('All');
   
   // Get unique modification types for filtering
-  const modTypes = ['All', ...new Set(modificationData.map(mod => mod.modType))];
+  //const modTypes = ['All', ...new Set(modificationData.map(mod => mod.modType))];
   
   // Filter modifications based on selected type filter
   const filteredMods = modificationData.filter(mod => {
-    return typeFilter === 'All' || mod.modType === parseInt(typeFilter);
+    return typeFilter === 0 || mod.modType === parseInt(typeFilter);
   });
 
   const handleAddMod = (mod) => {
@@ -30,9 +30,16 @@ const ModificationSelector = ({ modificationData, onAddModification }) => {
             value={typeFilter}
             onChange={(e) => setTypeFilter(e.target.value)}
           >
-            {modTypes.map((type, index) => (
-              <option key={index} value={type}>{type}</option>
-            ))}
+            <option key={0} value={0}>All</option>
+            <option key={1} value={1}>Design Options</option>
+            <option key={2} value={2}>Engine Customization</option>
+            <option key={3} value={3}>Control Systems</option>
+            <option key={4} value={4}>Protective Systems</option>
+            <option key={5} value={5}>Signature</option>
+            <option key={6} value={6}>Weapon Mounts</option>
+            <option key={7} value={7}>Electronic Systems</option>
+            <option key={8} value={8}>Accessories</option>
+            <option key={9} value={9}>Other</option>
           </select>
         </div>
       </div>
