@@ -10,10 +10,10 @@ const ChassisSelector = ({ chassisData, selectedChassis, onChassisSelect }) => {
   // Filter chassis based on selected type filter
   const filteredChassis = chassisData.filter(chassis => {
     if(filter === 'Drones'){
-      return chassis.pilot !== -1
+      return chassis.pilot !== undefined && chassis.pilot !== -1
     }
     if(filter === 'Vehicles'){
-      return chassis.pilot === -1
+      return chassis.pilot === undefined || chassis.pilot === -1
     }
     return filter === 'All' || chassis.chassisType === parseInt(filter);
   });

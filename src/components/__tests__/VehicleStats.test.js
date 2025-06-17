@@ -59,7 +59,12 @@ describe('VehicleStats component', () => {
       seating: '2b + 2b',
       entry: '2+1t',
       setupTime: 0,
-      tol: 'N'
+      tol: 'N',
+      sensor: 2,
+      autonav: 1,
+      pilot: -1,
+      security: 0,
+      military: 0
     }
   };
 
@@ -126,7 +131,12 @@ describe('VehicleStats component', () => {
         seating: '',
         entry: '',
         setupTime: 0,
-        tol: 'N'
+        tol: 'N',
+        sensor: 0,
+        autonav: 0,
+        pilot: -1,
+        security: 0,
+        military: 0
       }
     };
 
@@ -184,5 +194,24 @@ describe('VehicleStats component', () => {
     const loadLeftRow = screen.getByText('Load Left:').closest('.stat-row');
     const zeroInLoadLeftRow = within(loadLeftRow).queryByText('0');
     expect(zeroInLoadLeftRow).not.toBeNull();
+  });
+
+  it('displays the new stats correctly', () => {
+    render(<VehicleStats vehicle={mockVehicle} />);
+
+    // Check for Sensor
+    expect(screen.getByText('Sensor:')).toBeInTheDocument();
+    const sensorRow = screen.getByText('Sensor:').closest('.stat-row');
+    expect(within(sensorRow).getByText('2')).toBeInTheDocument();
+
+    // Check for Autonav
+    expect(screen.getByText('Autonav:')).toBeInTheDocument();
+    const autonavRow = screen.getByText('Autonav:').closest('.stat-row');
+    expect(within(autonavRow).getByText('1')).toBeInTheDocument();
+
+    // Check for Pilot
+    expect(screen.getByText('Pilot:')).toBeInTheDocument();
+    const pilotRow = screen.getByText('Pilot:').closest('.stat-row');
+    expect(within(pilotRow).getByText('None')).toBeInTheDocument();
   });
 });
