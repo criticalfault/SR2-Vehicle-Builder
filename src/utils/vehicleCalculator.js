@@ -241,6 +241,12 @@ const evaluateModExpression = (mod, vehicle) => {
     EconomyMax: stats.economyMax,
     Fuel: stats.fuel,
     Cost: stats.cost,
+    Sensor: stats.sensor || 0,
+    SetupTime: stats.setupTime || 0,
+    Autonav: stats.autonav || 0,
+    Pilot: stats.pilot || -1,
+    Security: stats.security || 0,
+    Military: stats.military || 0,
     // Add engine and chassis context for expressions that reference them
     Engine: {
       ...vehicle.engine,
@@ -266,6 +272,10 @@ const evaluateModExpression = (mod, vehicle) => {
       LoadUsed: context.LoadUsed,
       Handling: context.Handling,
       Body: context.Body,
+      Sensor: context.Sensor,
+      SetupTime: context.SetupTime,
+      Autonav: context.Autonav,
+      Pilot: context.Pilot,
       Engine: { Cost: context.Engine.Cost },
       Chassis: { Cost: context.Chassis.Cost }
     });
@@ -399,7 +409,11 @@ const evaluateModExpression = (mod, vehicle) => {
       LoadUsed: context.LoadUsed,
       Handling: context.Handling,
       Speed: context.Speed,
-      Accel: context.Accel
+      Accel: context.Accel,
+      Sensor: context.Sensor,
+      SetupTime: context.SetupTime,
+      Autonav: context.Autonav,
+      Pilot: context.Pilot
     });
   }
   
@@ -422,6 +436,12 @@ const evaluateModExpression = (mod, vehicle) => {
   stats.economyMax = context.EconomyMax;
   stats.fuel = context.Fuel;
   stats.tol = context.TOL || stats.tol;
+  stats.sensor = context.Sensor;
+  stats.setupTime = context.SetupTime;
+  stats.autonav = context.Autonav;
+  stats.pilot = context.Pilot;
+  stats.security = context.Security;
+  stats.military = context.Military;
   
   if (debug) {
     console.log(`Final stats:`, stats);
@@ -462,7 +482,8 @@ export const calculateVehicleStats = (vehicle) => {
     entry: '',
     setupTime: 0,
     tol: 'N',
-    // Add additional stats that might be set by modifications
+    // Additional stats that might be set by modifications
+    sensor: 0,
     pilot: -1,
     autonav: 0,
     security: 0,
@@ -483,7 +504,8 @@ export const calculateVehicleStats = (vehicle) => {
       seating: vehicle.chassis.seating || '',
       entry: vehicle.chassis.entry || '',
       setupTime: vehicle.chassis.setupTime || 0,
-      tol: vehicle.chassis.tol || 'N'
+      tol: vehicle.chassis.tol || 'N',
+      sensor: vehicle.chassis.sensor || 0
     };
   }
   

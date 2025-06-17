@@ -103,6 +103,18 @@ const VehicleStats = ({ vehicle }) => {
             <span className="stat-label">TOL Profile:</span>
             <span className="stat-value">{stats.tol}</span>
           </div>
+          <div className="stat-row">
+            <span className="stat-label">Sensor:</span>
+            <span className="stat-value">{stats.sensor || 0}</span>
+          </div>
+          <div className="stat-row">
+            <span className="stat-label">Autonav:</span>
+            <span className="stat-value">{stats.autonav || 0}</span>
+          </div>
+          <div className="stat-row">
+            <span className="stat-label">Pilot:</span>
+            <span className="stat-value">{stats.pilot === -1 ? 'None' : stats.pilot}</span>
+          </div>
         </div>
       </div>
     </div>
