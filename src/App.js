@@ -3,10 +3,11 @@ import Header from './components/Header';
 import VehicleForm from './components/VehicleForm';
 import ChassisSelector from './components/ChassisSelector';
 import EngineSelector from './components/EngineSelector';
-import ModificationSelector from './components/ModificationSelector';
 import ModificationList from './components/ModificationList';
 import VehicleStats from './components/VehicleStats';
 import SaveLoadButtons from './components/SaveLoadButtons';
+import VehicleConfigurator from './components/VehicleConfigurator';
+import ModificationSelector from './components/ModificationSelector';
 import { loadChassisData, loadEngineData, loadModificationData } from './utils/dataLoader';
 import { calculateVehicleStats } from './utils/vehicleCalculator';
 import './styles/App.css';
@@ -14,7 +15,7 @@ import './styles/App.css';
 function App() {
   const [chassisData, setChassisData] = useState([]);
   const [engineData, setEngineData] = useState([]);
-  const [modificationData, setModificationData] = useState([]);
+  const [modificationData, setModificationData] = useState({ modifications: [], designs: [], allModifications: [] });
   const [loading, setLoading] = useState(true);
   
   const [vehicle, setVehicle] = useState({
@@ -92,10 +93,25 @@ function App() {
   };
 
   const handleAddModification = (mod) => {
-    setVehicle(prev => ({
-      ...prev,
-      modifications: [...prev.modifications, mod]
-    }));
+    // Check if the modification is already in the list
+    const existingModIndex = vehicle.modifications.findIndex(m => m.modName === mod.modName);
+    
+    if (existingModIndex >= 0) {
+      // Update existing modification
+      const updatedMods = [...vehicle.modifications];
+      updatedMods[existingModIndex] = mod;
+      
+      setVehicle(prev => ({
+        ...prev,
+        modifications: updatedMods
+      }));
+    } else {
+      // Add new modification
+      setVehicle(prev => ({
+        ...prev,
+        modifications: [...prev.modifications, mod]
+      }));
+    }
   };
 
   const handleRemoveModification = (index) => {
@@ -178,10 +194,30 @@ function App() {
         </div>
       </div>
       <div className="modifications-panel">
-        <ModificationSelector 
-          modificationData={modificationData} 
-          onAddModification={handleAddModification} 
-        />
+        {vehicle.chassis && vehicle.engine && (
+          <ModificationSelector
+            allModifications={modificationData.allModifications || []}
+            vehicle={{
+              Chassis: vehicle.chassis,
+              Engine: vehicle.engine,
+              Handling: vehicle.chassis.handling,
+              OffRoad: vehicle.chassis.offRoad,
+              Body: vehicle.chassis.body,
+              Armour: vehicle.chassis.armour || 0,
+              CF: vehicle.chassis.cf,
+              CFMax: vehicle.chassis.cfMax,
+              Speed: vehicle.engine.speed || 0,
+              SpeedMax: vehicle.engine.speedMax || 0,
+              Accel: vehicle.engine.accel || 0,
+              AccelMax: vehicle.engine.accelMax || 0,
+              Load: vehicle.engine.load || 0,
+              LoadMax: vehicle.engine.loadMax || 0,
+              Cost: (vehicle.chassis.cost || 0) + (vehicle.engine.cost || 0)
+            }}
+            onModificationSelect={handleAddModification}
+            selectedMods={vehicle.modifications}
+          />
+        )}
         <ModificationList 
           modifications={vehicle.modifications} 
           onRemoveModification={handleRemoveModification}
